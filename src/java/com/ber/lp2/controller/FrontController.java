@@ -7,10 +7,12 @@ package com.ber.lp2.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -40,10 +42,13 @@ public class FrontController extends HttpServlet {
                 if (command.endsWith("login")) {
                     String username = request.getParameter("username");
                     String password = request.getParameter("password");
-                    if (LoginManager.authorize(username, password)) {
-                        out.print("BATUTA");
+                    if (LoginManager.authorize(username, password) == 1) {
+                        RequestDispatcher rd = request.getRequestDispatcher("/home.jsp");
+                        request.getSession().setAttribute("username", username);
+                        request.getSession().setAttribute("password", password);
+                        rd.forward(request, response);
                     } else {
-                        out.print("DEU RUIM");
+                        response.sendRedirect("error.jsp");
                     }
                 }
             }
