@@ -1,0 +1,32 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.ber.lp2.controller;
+
+import com.br.lp2.model.dao.UsuarioDAO;
+import com.br.lp2.model.User;
+
+/**
+ *
+ * @author 31338283
+ */
+public class LoginManager {
+
+    public static boolean authorize(String username, String password) {
+        boolean auth = false;
+        UsuarioDAO dao = new UsuarioDAO();
+        User usuario = dao.readByUsername(username);
+        if (usuario.getId_usuario() == -1) {
+            System.out.println("Error: User not fount");
+        } else if (!usuario.getPassword().equals(password)) {
+            System.out.println("Error: Invalid password");
+        } else {
+            auth = true;
+        }
+
+        return auth;
+    }
+
+}

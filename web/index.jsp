@@ -9,9 +9,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form action="FrontController" method="POST">
+            <fieldset>
+                <legend>LOGIN</legend>
+                <p> Username: *<input type="text" name="username" placeholder="username" required/></p>
+                <p> Password: *<input type="text" name="password" placeholder="password" required/></p>
+                <p><input type="submit" value="LOGIN"></p>
+                <input type="hidden" name="command" value="user.login"/>
+            </fieldset>
+        </form>
     </body>
 </html>
