@@ -12,6 +12,9 @@
         <title>Projeto LP2</title>
     </head>
     <body>
-        <h1>EROU!</h1>
+        <h1>PAGINA DE ERRO!</h1>
+        <h2><%
+            out.print(request.getSession().getAttribute("code").toString());
+            %></h2>
     </body>
 </html>

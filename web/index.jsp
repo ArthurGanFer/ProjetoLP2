@@ -17,9 +17,11 @@
             <fieldset>
                 <legend>LOGIN</legend>
                 <p> Username: *<input type="text" name="username" placeholder="username" required/></p>
-                <p> Password: *<input type="text" name="password" placeholder="password" required/></p>
+                <p> Password: *<input type="password" name="password" placeholder="password" required/></p>
                 <p><input type="submit" value="LOGIN"></p>
                 <input type="hidden" name="command" value="user.login"/>
+                
+                <a href="register.jsp">SIGN UP</a>
             </fieldset>
         </form>
     </body>

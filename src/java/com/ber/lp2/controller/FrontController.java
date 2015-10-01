@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import com.br.lp2.model.User;
 
 /**
  *
@@ -37,20 +38,54 @@ public class FrontController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             //todas as operações user
             if (command.startsWith("user")) {
+                RequestDispatcher rd;
+                int code = 0;
 
                 //LOGIN
                 if (command.endsWith("login")) {
                     String username = request.getParameter("username");
                     String password = request.getParameter("password");
-                    if (LoginManager.authorize(username, password) == 1) {
-                        RequestDispatcher rd = request.getRequestDispatcher("/home.jsp");
-                        request.getSession().setAttribute("username", username);
-                        request.getSession().setAttribute("password", password);
-                        rd.forward(request, response);
-                    } else {
-                        response.sendRedirect("error.jsp");
-                    }
+                    code = UserManager.authorize(username, password);
+                    request.getSession().setAttribute("username", username);
+                } else if (command.endsWith("insert")) {
+                    //INSERT
+                    String username2 = request.getParameter("username");
+                    String pwd = request.getParameter("password");
+                    String pwd2 = request.getParameter("password2");
+                    User user = new User();
+                    user.setUsername(username2);
+                    user.setPassword(pwd);
+                    code = UserManager.insert(user, pwd2);
+                    request.getSession().setAttribute("username", username2);
                 }
+
+                if (code == 1) {
+                    rd = request.getRequestDispatcher("/home.jsp");
+                    rd.forward(request, response);
+                } else {
+                    rd = request.getRequestDispatcher("/error.jsp");
+                    String msg = "";
+                    switch (code) {
+                        case -1:
+                            msg = "User not found!";
+                            break;
+                        case -2:
+                            msg = "Invalid Password!";
+                            break;
+                        case -3:
+                            msg = "User already exist!";
+                            break;
+                        case -4:
+                            msg = "Password doesn't match!";
+                            break;
+                        case -5:
+                            msg = "Error on database. Try again!";
+                            break;
+                    }
+                    request.getSession().setAttribute("code", msg);
+                    rd.forward(request, response);
+                }
+
             }
         }
     }
