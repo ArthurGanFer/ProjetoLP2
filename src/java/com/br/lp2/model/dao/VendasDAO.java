@@ -84,13 +84,50 @@ public class VendasDAO implements GenericDAO<Vendas> {
     }
 
     @Override
-    public boolean update(Vendas t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean update(Vendas vendas) {
+        boolean resp = false;
+        String sql = "UPDATE vendas SET id_carro=?,id_usuario=?,data_venda=? WHERE id_vendas=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, vendas.getId_carro());
+            ps.setInt(2, vendas.getId_usuario());
+            ps.setDate(3, new java.sql.Date(2015, 10, 21));
+            ps.setInt(4, vendas.getId_vendas());
+            int resposta = ps.executeUpdate();
+            if (resposta == 0) {
+                System.out.println("Erro ao atualizar a venda");
+            } else {
+                System.out.println("Venda atualizada com sucesso!");
+                resp = true;
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return resp;
     }
 
     @Override
-    public boolean delete(Vendas t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean delete(Vendas vendas) {
+        boolean resp = false;
+        String sql = "DELETE FROM vendas WHERE id_vendas=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, vendas.getId_vendas());
+            int resposta = ps.executeUpdate();
+            if (resposta == 0) {
+                System.out.println("Erro ao remover Venda");
+            } else {
+                System.out.println("Venda removida com sucesso!");
+                resp = true;
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return resp;
     }
 
 }
