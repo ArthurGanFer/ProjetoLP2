@@ -11,18 +11,18 @@ import java.io.Serializable;
  *
  * @author 31338283
  */
-public class User implements Serializable {
+public class Usuario implements Serializable {
 
     private int id_usuario;
     private String username, password;
 
-    public User(int id_usuario, String username, String password) {
+    public Usuario(int id_usuario, String username, String password) {
         this.id_usuario = id_usuario;
         this.username = username;
         this.password = password;
     }
 
-    public User() {
+    public Usuario() {
         this.id_usuario = -1;
         this.username = "anonimo";
         this.password = "1234567";

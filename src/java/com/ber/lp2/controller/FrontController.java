@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import com.br.lp2.model.User;
+import com.br.lp2.model.Usuario;
 
 /**
  *
@@ -52,7 +52,7 @@ public class FrontController extends HttpServlet {
                     String username2 = request.getParameter("username");
                     String pwd = request.getParameter("password");
                     String pwd2 = request.getParameter("password2");
-                    User user = new User();
+                    Usuario user = new Usuario();
                     user.setUsername(username2);
                     user.setPassword(pwd);
                     code = UserManager.insert(user, pwd2);

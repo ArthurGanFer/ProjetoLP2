@@ -5,7 +5,7 @@
  */
 package com.br.lp2.model.dao;
 
-import com.br.lp2.model.User;
+import com.br.lp2.model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +17,7 @@ import java.util.List;
  *
  * @author 31338283
  */
-public class UsuarioDAO implements GenericDAO<User> {
+public class UsuarioDAO implements GenericDAO<Usuario> {
 
     private Connection conn;
 
@@ -27,8 +27,8 @@ public class UsuarioDAO implements GenericDAO<User> {
     }
 
     @Override
-    public List<User> read() {
-        List<User> usuarios = new ArrayList<>();
+    public List<Usuario> read() {
+        List<Usuario> usuarios = new ArrayList<>();
         //2. Criar o preparedStatement
         String sql = "SELECT * FROM usuario";
         try {
@@ -42,7 +42,7 @@ public class UsuarioDAO implements GenericDAO<User> {
                 int id = rs.getInt("id_usuario");
                 String nome = rs.getString("username");
                 String senha = rs.getString("password");
-                User u = new User();
+                Usuario u = new Usuario();
                 usuarios.add(u);
             }
 
@@ -57,7 +57,7 @@ public class UsuarioDAO implements GenericDAO<User> {
     }
 
     @Override
-    public boolean insert(User usuario) {
+    public boolean insert(Usuario usuario) {
         boolean resp = false;
         String sql = "INSERT INTO usuario(username,password) VALUES(?,?)";
         try {
@@ -80,7 +80,7 @@ public class UsuarioDAO implements GenericDAO<User> {
     }
 
     @Override
-    public boolean update(User usuario) {
+    public boolean update(Usuario usuario) {
         boolean resp = false;
         String sql = "UPDATE usuario SET username=?,password=? WHERE id_usuario=?";
         try {
@@ -104,7 +104,7 @@ public class UsuarioDAO implements GenericDAO<User> {
     }
 
     @Override
-    public boolean delete(User usuario) {
+    public boolean delete(Usuario usuario) {
         boolean resp = false;
         String sql = "DELETE FROM usuario WHERE id_usuario=?";
         try {
@@ -125,8 +125,8 @@ public class UsuarioDAO implements GenericDAO<User> {
         return resp;
     }
 
-    public User readByUsername(String username) {
-        User usuario = new User();
+    public Usuario readByUsername(String username) {
+        Usuario usuario = new Usuario();
         //2. Criar o preparedStatement
         String sql = "SELECT * FROM usuario WHERE username=?";
         try {

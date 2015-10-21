@@ -1,6 +1,6 @@
 package com.ber.lp2.controller;
 
-import com.br.lp2.model.User;
+import com.br.lp2.model.Usuario;
 import com.br.lp2.model.dao.UsuarioDAO;
 
 /**
@@ -12,7 +12,7 @@ public class UserManager {
     public static int authorize(String username, String password) {
         int auth = -1;
         UsuarioDAO dao = new UsuarioDAO();
-        User usuario = dao.readByUsername(username);
+        Usuario usuario = dao.readByUsername(username);
         if (usuario.getId_usuario() == -1) {
             System.out.println("Error: User not fount");
             auth = -1;
@@ -26,7 +26,7 @@ public class UserManager {
         return auth;
     }
 
-    public static int insert(User user, String pwd2) {
+    public static int insert(Usuario user, String pwd2) {
         UsuarioDAO dao = new UsuarioDAO();
 
         if (dao.readByUsername(user.getUsername()).getId_usuario() != -1) {
