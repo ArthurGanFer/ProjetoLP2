@@ -30,7 +30,8 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     public List<Usuario> read() {
         List<Usuario> usuarios = new ArrayList<>();
         //2. Criar o preparedStatement
-        String sql = "SELECT * FROM usuario";
+        String sql = "SELECT * FROM usuario u"
+                + "INNER JOIN usuario_info i ON u.id_usuario = i.id_usuario";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
 
