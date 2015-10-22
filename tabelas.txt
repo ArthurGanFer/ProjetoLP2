@@ -1,0 +1,37 @@
+create table usuario(
+    id_usuario int not null primary key generated always as identity(start with 1, increment by 1),
+    username varchar(20),
+    password varchar(7),
+    tipo_usuario smallint default 0
+);
+
+create table usuario_info(
+    id_usuario_info int not null primary key generated always as identity(start with 1, increment by 1),
+    id_usuario int,
+    nome varchar(30),
+    email varchar(50),
+    idade int
+);
+
+create table carro(
+    id_carro int not null primary key generated always as identity(start with 1, increment by 1),
+    marca varchar(20),
+    modelo varchar(40),
+    ano int,
+    quantidade int
+);
+
+create table vendas(
+    id_venda int not null primary key generated always as identity(start with 1, increment by 1),
+    id_carro int,
+    id_usuario int,
+    data_venda date
+);
+
+alter table usuario_info add foreign key(id_usuario) references usuario(id_usuario);
+alter table vendas add foreign key(id_carro) references carro(id_carro);
+alter table vendas add foreign key(id_usuario) references usuario(id_usuario);
+
+
+insert into usuario(username,password,tipo_usuario) values('admin','admin',1);
+insert into usuario(username,password) values('usuarioteste','teste');
