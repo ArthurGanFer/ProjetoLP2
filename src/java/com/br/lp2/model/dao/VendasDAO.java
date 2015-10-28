@@ -5,12 +5,12 @@
  */
 package com.br.lp2.model.dao;
 
-import com.br.lp2.model.Usuario;
 import com.br.lp2.model.Vendas;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +22,7 @@ import java.util.List;
 public class VendasDAO implements GenericDAO<Vendas> {
 
     private Connection conn;
+    private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 
     public VendasDAO() {
         //1. Realizar a conexão
@@ -67,7 +68,8 @@ public class VendasDAO implements GenericDAO<Vendas> {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, vendas.getId_carro());
             ps.setInt(2, vendas.getId_usuario());
-            ps.setDate(3, new java.sql.Date(2015, 10, 21));
+            java.sql.Date sqlDate = new java.sql.Date(vendas.getData_venda().getTime());
+            ps.setDate(3, sqlDate);
             int resposta = ps.executeUpdate();
             if (resposta == 0) {
                 System.out.println("Erro ao inserir a Venda");
@@ -91,7 +93,8 @@ public class VendasDAO implements GenericDAO<Vendas> {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, vendas.getId_carro());
             ps.setInt(2, vendas.getId_usuario());
-            ps.setDate(3, new java.sql.Date(2015, 10, 21));
+            java.sql.Date sqlDate = new java.sql.Date(vendas.getData_venda().getTime());
+            ps.setDate(3, sqlDate);
             ps.setInt(4, vendas.getId_vendas());
             int resposta = ps.executeUpdate();
             if (resposta == 0) {

@@ -25,7 +25,7 @@ create table vendas(
     id_venda int not null primary key generated always as identity(start with 1, increment by 1),
     id_carro int,
     id_usuario int,
-    data_venda date
+    data_venda timestamp
 );
 
 alter table usuario_info add foreign key(id_usuario) references usuario(id_usuario);
