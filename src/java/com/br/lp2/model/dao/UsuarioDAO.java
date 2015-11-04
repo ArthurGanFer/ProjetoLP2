@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -65,31 +66,37 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
         boolean resp = false;
         String sql = "INSERT INTO usuario(username,password) VALUES(?,?)";
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, usuario.getUsername());
             ps.setString(2, usuario.getPassword());
-            int resposta = ps.executeUpdate();
-            if (resposta == 0) {
+            ps.executeUpdate();
+            ResultSet rs2 = ps.getGeneratedKeys();
+            int chave = -1;
+            while (rs2.next()) {
+                chave = rs2.getInt(1);
+            }
+            boolean resposta = this.insertInfo(usuario.getUsuario_info(), chave);
+            if (resposta == false) {
                 System.out.println("Erro ao inserir o Usuário");
             } else {
                 System.out.println("Usuário inserido com sucesso!");
                 resp = true;
             }
-
             ps.close();
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return resp;
     }
 
-    private boolean insertInfo(Usuario_info usuario_info) {
+    private boolean insertInfo(Usuario_info usuario_info, int chave) {
         boolean resp = false;
         String sql = "INSERT INTO usuario_info (id_usuario, nome, email, idade) VALUES (?,?,?,?)";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setInt(1, usuario_info.getId_usuario());
+            ps.setLong(1, chave);
             ps.setString(2, usuario_info.getNome());
             ps.setString(3, usuario_info.getEmail());
             ps.setInt(4, usuario_info.getIdade());

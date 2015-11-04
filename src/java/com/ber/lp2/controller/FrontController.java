@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import com.br.lp2.model.Usuario;
+import com.br.lp2.model.Usuario_info;
 
 /**
  *
@@ -52,9 +53,17 @@ public class FrontController extends HttpServlet {
                     String username2 = request.getParameter("username");
                     String pwd = request.getParameter("password");
                     String pwd2 = request.getParameter("password2");
+                    String nome = request.getParameter("nome");
+                    String email = request.getParameter("email");
+                    int idade = Integer.parseInt(request.getParameter("idade"));
+                    Usuario_info info = new Usuario_info();
+                    info.setNome(nome);
+                    info.setEmail(email);
+                    info.setIdade(idade);
                     Usuario user = new Usuario();
                     user.setUsername(username2);
                     user.setPassword(pwd);
+                    user.setUsuario_info(info);
                     code = UserManager.insert(user, pwd2);
                     request.getSession().setAttribute("username", username2);
                 }

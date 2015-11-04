@@ -19,6 +19,9 @@
                 <p>Username: <input type="text" name="username" maxlength="20" required/></p>
                 <p>Password: <input type="password" name="password" maxlength="7" required/></p>
                 <p>Confirm Password: <input type="password" name="password2" maxlength="7" required/></p>
+                <p>Nome <input type="text" name="nome" required></p>
+                <p>E-mail <input type="text" name="email" required></p>
+                <p>idade <input type="number" name="idade" required></p>
                 <!--Colocar qui os campos para cadastro -->
                 <p><input type="submit" value="SIGN UP"/></p>
                 <input type="hidden" name="command" value="user.insert"/>
