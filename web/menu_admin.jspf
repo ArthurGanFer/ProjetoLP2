@@ -1,0 +1,11 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<nav>
+    <ul>
+        <li>Inserir Usuário</li>
+        <li>Atualizar Usuário</li>
+        <li>Remover Usuário</li>
+        <li>Mudar Privilégio do Usuário</li>
+        <li><a href="FrontController?command=user.logout">LOG OUT</a></li>
+    </ul>
+</nav>

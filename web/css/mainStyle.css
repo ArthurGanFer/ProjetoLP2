@@ -1,0 +1,27 @@
+/* 
+    Created on : 30/09/2015, 08:38:34
+    Author     : 1147106
+*/
+*{
+    font-family: Arial, Verdana;
+}
+
+fieldset{
+    width: 200px;
+}
+
+nav ul li{
+    display: inline-block;
+    list-style-type: none;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+.avatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    float: left;
+    margin-right: 20px;
+    margin-left: 15px;
+}
