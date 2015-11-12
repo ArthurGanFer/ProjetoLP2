@@ -5,6 +5,7 @@
  */
 package com.br.lp2.model.dao;
 
+import com.br.lp2.exceptions.UserException;
 import com.br.lp2.model.Usuario;
 import com.br.lp2.model.Usuario_info;
 import java.sql.Connection;
@@ -19,7 +20,7 @@ import java.util.List;
  *
  * @author 1147106
  */
-public class UsuarioDAO implements GenericDAO<Usuario>{
+public class UsuarioDAO implements GenericDAO<Usuario> {
 
     private Connection conn;
 
@@ -27,10 +28,10 @@ public class UsuarioDAO implements GenericDAO<Usuario>{
         //1. Realizar a conexão
         conn = ConnectionDB.getInstance();
     }
-    
+
     @Override
     public boolean insert(Usuario usuario) {
-        boolean resp = false;    
+        boolean resp = false;
         String sql = "INSERT INTO usuario(username,password,user_type,birthday,photo) VALUES(?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -38,9 +39,9 @@ public class UsuarioDAO implements GenericDAO<Usuario>{
             ps.setString(2, usuario.getPassword());
             ps.setInt(3, usuario.getUser_type());
             java.sql.Date datesql = new java.sql.Date(usuario.getBirthday().getTime());
-            ps.setDate(4,datesql);
-            ps.setString(5,usuario.getPhoto());
-             ps.executeUpdate();
+            ps.setDate(4, datesql);
+            ps.setString(5, usuario.getPhoto());
+            ps.executeUpdate();
             ResultSet rs2 = ps.getGeneratedKeys();
             int chave = -1;
             while (rs2.next()) {
@@ -68,32 +69,32 @@ public class UsuarioDAO implements GenericDAO<Usuario>{
                 + "INNER JOIN usuario_info i ON u.id_usuario = i.id_usuario";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            
+
             //3. Executa a query
             ResultSet rs = ps.executeQuery();
-            
+
             //4. Mostrar os resultados
-            while(rs.next()){
+            while (rs.next()) {
                 Usuario user = new Usuario();
-                user.setId_user( rs.getInt("id_user") );
-                user.setUsername( rs.getString("username") );
-                user.setPassword( rs.getString("password") );
+                user.setId_user(rs.getInt("id_user"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
                 user.setUser_type(rs.getInt("user_type"));
                 user.setBirthday(rs.getDate("birthday"));
                 user.setPhoto(rs.getString("photo"));
                 users.add(user);
             }
-            
+
             //5. Fechar tudo
             ps.close();
             rs.close();
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return users;
     }
-    
+
     public Usuario readByUsername(String username) {
         Usuario user = new Usuario();
         //2. Criar o preparedStatement
@@ -103,27 +104,33 @@ public class UsuarioDAO implements GenericDAO<Usuario>{
             ps.setString(1, username);
             //3. Executa a query
             ResultSet rs = ps.executeQuery();
-            
+
             //4. Mostrar os resultados
-            while(rs.next()){
-                user.setId_user( rs.getInt("id_usuario") );
-                user.setUsername( rs.getString("username") );
-                user.setPassword( rs.getString("password") );
+            int cont = 0;
+            while (rs.next()) {
+                cont++;
+                user.setId_user(rs.getInt("id_usuario"));
+                user.setUsername(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
                 user.setUser_type(rs.getInt("user_type"));
                 user.setBirthday(rs.getDate("birthday"));
                 user.setPhoto(rs.getString("photo"));
             }
-            
+
+            if (cont == 0) {
+                throw new UserException(UserException.USER_NOT_FOUND);
+            }
+
             //5. Fechar tudo
             ps.close();
             rs.close();
-            
+
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return user;
     }
-    
+
     private boolean insertInfo(Usuario_info usuario_info, int chave) {
         boolean resp = false;
         String sql = "INSERT INTO usuario_info (id_usuario, nome, email, idade) VALUES (?,?,?,?)";
@@ -163,13 +170,13 @@ public class UsuarioDAO implements GenericDAO<Usuario>{
             ps.setString(5, user.getPhoto());
             ps.setInt(6, user.getId_user());
             int resposta = ps.executeUpdate();
-            if(resposta == 0){
+            if (resposta == 0) {
                 System.out.println("Erro: Usuário não pode ser atualizado !");
             } else {
                 System.out.println("Usuário atualizado com sucesso !");
                 resp = true;
             }
-            
+
             ps.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -185,13 +192,13 @@ public class UsuarioDAO implements GenericDAO<Usuario>{
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, user.getId_user());
             int resposta = ps.executeUpdate();
-            if(resposta == 0){
+            if (resposta == 0) {
                 System.out.println("Erro ao remover usuário !");
             } else {
                 System.out.println("Usuário removido com sucesso !");
                 resp = true;
             }
-            
+
             ps.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
