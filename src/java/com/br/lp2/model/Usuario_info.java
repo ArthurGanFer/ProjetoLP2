@@ -15,17 +15,15 @@ public class Usuario_info {
     private int id_usuario; //chave estrangeira de usuario
     private String nome;
     private String email;
-    private int idade;
 
     public Usuario_info() {
     }
 
-    public Usuario_info(int id_usuario_info, int id_usuario, String nome, String email, int idade) {
+    public Usuario_info(int id_usuario_info, int id_usuario, String nome, String email) {
         this.id_usuario_info = id_usuario_info;
         this.id_usuario = id_usuario;
         this.nome = nome;
         this.email = email;
-        this.idade = idade;
     }
 
     public int getId_usuario_info() {
@@ -60,17 +58,9 @@ public class Usuario_info {
         this.email = email;
     }
 
-    public int getIdade() {
-        return idade;
-    }
-
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
-
     @Override
     public String toString() {
-        return "Usuario_info{" + "id_usuario_info=" + id_usuario_info + ", id_usuario=" + id_usuario + ", nome=" + nome + ", email=" + email + ", idade=" + idade + '}';
+        return "Usuario_info{" + "id_usuario_info=" + id_usuario_info + ", id_usuario=" + id_usuario + ", nome=" + nome + ", email=" + email + '}';
     }
 
 }

@@ -133,14 +133,13 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
     private boolean insertInfo(Usuario_info usuario_info, int chave) {
         boolean resp = false;
-        String sql = "INSERT INTO usuario_info (id_usuario, nome, email, idade) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO usuario_info (id_usuario, nome, email) VALUES (?,?,?)";
 
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setLong(1, chave);
             ps.setString(2, usuario_info.getNome());
             ps.setString(3, usuario_info.getEmail());
-            ps.setInt(4, usuario_info.getIdade());
             int resposta = ps.executeUpdate();
             if (resposta == 0) {
                 System.out.println("Erro ao inserir o Usuário");

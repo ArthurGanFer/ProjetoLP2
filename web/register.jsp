@@ -20,7 +20,6 @@
                 <p>Confirm Password: <input type="password" name="password2" maxlength="7" required> *</p>
                 <p>Nome <input type="text" name="nome" required></p>
                 <p>E-mail <input type="text" name="email" required></p>
-                <p>idade <input type="number" name="idade" required></p>
                 <!-- COLOCAR AQUI OS OUTROS CAMPOS-->
                 <p><input type="date" name="birthday"/></p>
                 <p>Photo: <input type="file" name="file"/></p>

@@ -75,7 +75,6 @@ public class FrontController extends HttpServlet {
                     String pwd2 = request.getParameter("password2");
                     String nome = request.getParameter("nome");
                     String email = request.getParameter("email");
-                    int idade = Integer.parseInt(request.getParameter("idade"));
                     String datestr = request.getParameter("birthday");
                     
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -88,7 +87,6 @@ public class FrontController extends HttpServlet {
                     Usuario_info info = new Usuario_info();
                     info.setNome(nome);
                     info.setEmail(email);
-                    info.setIdade(idade);
                     
                     Usuario user = new Usuario();
                     
