@@ -24,18 +24,18 @@ public class UserManager {
         int auth = -1;
         UsuarioDAO dao = new UsuarioDAO();
         user = new Usuario();
-        try {
-            user = dao.readByUsername(username);
-            auth = 1;
-        } catch (UserException ex) {
-            if (user.getId_user() == -1) {
-                System.out.println("Error: User not found");
-                auth = -1;
-            } else if (!user.getPassword().equals(password)) {
-                System.out.println("Error: Wrong passsword");
-                auth = -2;
-            }
+        
+        user = dao.readByUsername(username);
+        auth = 1;
+        
+        if (user.getId_user() == -1) {
+            System.out.println("Error: User not found");
+            auth = -1;
+        } else if (!user.getPassword().equals(password)) {
+            System.out.println("Error: Wrong passsword");
+            auth = -2;
         }
+
         return auth;
     }
 

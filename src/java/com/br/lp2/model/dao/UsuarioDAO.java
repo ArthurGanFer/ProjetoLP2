@@ -117,10 +117,6 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
                 user.setPhoto(rs.getString("photo"));
             }
 
-            if (cont == 0) {
-                throw new UserException(UserException.USER_NOT_FOUND);
-            }
-
             //5. Fechar tudo
             ps.close();
             rs.close();

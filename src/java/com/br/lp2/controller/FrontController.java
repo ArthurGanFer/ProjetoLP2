@@ -68,7 +68,7 @@ public class FrontController extends HttpServlet {
        
                     request.getSession().setAttribute("user", UserManager.getUser());
                     
-                } else if(command.endsWith("insert")){ 
+                } else if(command.endsWith("insert")){
                     //---------- INSERT USER ----------
                     String username2 = request.getParameter("username");
                     String pwd = request.getParameter("password");
