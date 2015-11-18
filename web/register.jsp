@@ -10,21 +10,22 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Projeto LP2</title>
+        <link rel="stylesheet" type="text/css" href="css/mainStyle.css"/>
     </head>
     <body>
         <form action="FrontController" method="POST" enctype="multipart/form-data">
             <fieldset>
                 <legend>SIGN UP</legend>
-                <p>Username: <input type="text" name="username" maxlength="20" required> *</p>
-                <p>Password: <input type="password" name="password" maxlength="7" required> *</p>
-                <p>Confirm Password: <input type="password" name="password2" maxlength="7" required> *</p>
-                <p>Nome <input type="text" name="nome" required></p>
-                <p>E-mail <input type="text" name="email" required></p>
-                <!-- COLOCAR AQUI OS OUTROS CAMPOS-->
-                <p><input type="date" name="birthday"/></p>
-                <p>Photo: <input type="file" name="file"/></p>
-                <p><input type="submit" value="SIGN UP"/></p>
+                <label>Username: <input type="text" id="username" name="username" maxlength="20" required> *</label>
+                <label>Password: <input type="password" id="password" name="password" maxlength="7" required> *</label>
+                <label>Confirm Password: <input type="password" id="password2" name="password2" maxlength="7" required> *</label>
+                <label>Nome: <input type="text" id="nome" name="nome" required></label>
+                <label>E-mail: <input type="text" id="email" name="email" required></label>
+                <label>Data de Nacimento: <input type="date" id="birthday" name="birthday"/></label>
+                <label>Photo: <input type="file" id="file" name="file"/></label>
+                <label><input type="submit" value="SIGN UP"/></label>
                 <input type="hidden" name="command" value="user.insert"/>
+                <a href="index.jsp">voltar</a>
             </fieldset>
         </form>
     </body>

@@ -29,8 +29,5 @@
             </c:when>
         </c:choose>
 
-        <hr>
-
-
     </body>
 </html>

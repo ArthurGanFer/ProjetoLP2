@@ -6,8 +6,10 @@
     font-family: Arial, Verdana;
 }
 
-fieldset{
-    width: 200px;
+label{
+    display: block;
+    margin-bottom: 15px;
+    font-weight: 600;
 }
 
 nav ul li{
@@ -16,7 +18,9 @@ nav ul li{
     padding: 10px;
     background-color: #f0f0f0;
 }
-
+a{
+    color: #BED7EC;
+}
 .avatar{
     width: 100px;
     height: 100px;
@@ -24,4 +28,14 @@ nav ul li{
     float: left;
     margin-right: 20px;
     margin-left: 15px;
+}
+
+body {
+    background: #65B7FF;
+}
+
+fieldset {
+    display: inline-block;
+    color: whitesmoke;
+    background: #325B7F;
 }

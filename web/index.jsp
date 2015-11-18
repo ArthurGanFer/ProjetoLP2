@@ -17,10 +17,10 @@
         <form action="FrontController" method="POST">
             <fieldset>
                 <legend>LOGIN</legend>
-                <p>Username: <input type="text" name="username" placeholder="username" required value="${cookie.name.value}"/> *</p>
-                <p>Password: <input type="password" name="password" placeholder="password" required value="${cookie.pwd.value}"/> *</p>
-                <p><input type="checkbox" name="lembrar"> Lembrar Senha</p>
-                <p><input type="submit" value="LOGIN"/></p>
+                <label>Username: <input type="text" name="username" placeholder="username" required value="${cookie.name.value}"/> *</label>
+                <label>Password: <input type="password" name="password" placeholder="password" required value="${cookie.pwd.value}"/> *</label>
+                <label><input type="checkbox" name="lembrar"> Lembrar Senha</label>
+                <label><input type="submit" value="LOGIN"/></label>
                 <input type="hidden" name="command" value="user.login"/>
                 <a href="register.jsp">SIGN UP</a>
             </fieldset>
