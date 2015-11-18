@@ -1,0 +1,40 @@
+banco_lp2_03H
+
+create table USUARIO
+(
+	ID_USUARIO int not null primary key generated always as identity(start with 1, increment by 1),
+	USERNAME VARCHAR(20),
+	PASSWORD VARCHAR(7),
+	PHOTO VARCHAR(100),
+	BIRTHDAY DATE,
+	USER_TYPE SMALLINT default 0
+);
+
+create table USUARIO_INFO
+(
+	ID_USUARIO_INFO int not null primary key generated always as identity(start with 1, increment by 1),
+	ID_USUARIO INT,
+	NOME VARCHAR(30),
+	EMAIL VARCHAR(50),
+);
+
+create table CARRO
+(
+	ID_CARRO int not null primary key generated always as identity(start with 1, increment by 1),
+	MARCA VARCHAR(20),
+	MODELO VARCHAR(40),
+	ANO INT,
+	QUANTIDADE INT
+);
+
+create table VENDAS
+(
+	ID_VENDA int not null primary key generated always as identity(start with 1, increment by 1),
+	ID_CARRO INT,
+	ID_USUARIO INT,
+	DATA_VENDA TIMESTAMP
+);
+
+alter table usuario_info add foreign key(id_usuario) references usuario(id_usuario);
+alter table vendas add foreign key(id_usuario) references usuario(id_usuario);
+alter table vendas add foreign key(id_carro) references carro(id_carro);

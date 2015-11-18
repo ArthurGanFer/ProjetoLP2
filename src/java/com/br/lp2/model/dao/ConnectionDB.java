@@ -19,7 +19,7 @@ public class ConnectionDB {
     private static String protocolo = "jdbc:derby:";
     private static String db = "banco_lp2_03H";
     private static String dominio = "//localhost:1527/";
-    private static String user = "cacique";
+    private static String user = "arthur";
     private static String pwd = "123";
     private static Connection conn = null;
     
