@@ -11,7 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Projeto LP2</title>
-        <link rel="stylesheet" type="text/css" href="css/mainStyle.css"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
     </head>
     <body>
         <c:if test="${user == null}">
@@ -19,7 +19,6 @@
         </c:if>
         <img alt="imagem" class="avatar" src="http://localhost:8080/ProjetoLP2/img/${user.getUsername()}/${user.getPhoto()}"/>
         <h1>Welcome ${user.getUsername()}</h1>
-
         <c:choose>
             <c:when test="${user.getUser_type() == 0}">
                 <%@include file="menu_admin.jspf" %>
@@ -28,6 +27,8 @@
                 <%@include file="menu_user.jspf" %>
             </c:when>
         </c:choose>
+
+
 
     </body>
 </html>

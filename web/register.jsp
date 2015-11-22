@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Projeto LP2</title>
-        <link rel="stylesheet" type="text/css" href="css/mainStyle.css"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
     </head>
     <body>
         <form action="FrontController" method="POST" enctype="multipart/form-data">

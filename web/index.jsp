@@ -11,19 +11,26 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Projeto LP2</title>
-        <link rel="stylesheet" type="text/css" href="css/mainStyle.css"/>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="css/singin.css"/>
     </head>
     <body>
-        <form action="FrontController" method="POST">
-            <fieldset>
-                <legend>LOGIN</legend>
-                <label>Username: <input type="text" name="username" placeholder="username" required value="${cookie.name.value}"/> *</label>
-                <label>Password: <input type="password" name="password" placeholder="password" required value="${cookie.pwd.value}"/> *</label>
-                <label><input type="checkbox" name="lembrar"> Lembrar Senha</label>
-                <label><input type="submit" value="LOGIN"/></label>
+        <div class="container">
+            <form class="form-signin" action="FrontController" method="POST">
+                <h2 class="form-signin-heading">LOGIN</h2>
+                <label for="username" class="sr-only">Username</label>
+                <input type="text" id="username" class="form-control" placeholder="Username" required>
+                <label for="password" class="sr-only">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="password" required>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="lembrar">
+                        Lembrar Senha
+                    </label>
+                </div>
                 <input type="hidden" name="command" value="user.login"/>
-                <a href="register.jsp">SIGN UP</a>
-            </fieldset>
-        </form>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+            </form>
+        </div>
     </body>
 </html>
