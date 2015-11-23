@@ -1,8 +1,24 @@
 <%-- any content can be specified here e.g.: --%>
 <%@ page pageEncoding="UTF-8" %>
-<nav>
-    <ul>
-        <li>Atualizar cadastro</li>
-        <li><a href="FrontController?command=user.logout">LOG OUT</a></li>
-    </ul>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <img alt="imagem" class="avatar" src="http://localhost:8080/ProjetoLP2/img/${user.getUsername()}/${user.getPhoto()}"/>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a>Welcome ${user.getUsername()}</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="FrontController?command=user.logout">LOG OUT</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+
 </nav>

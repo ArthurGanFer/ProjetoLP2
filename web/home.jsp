@@ -12,13 +12,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Projeto LP2</title>
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
     </head>
     <body>
         <c:if test="${user == null}">
             <c:redirect url="index.jsp"></c:redirect>
         </c:if>
-        <img alt="imagem" class="avatar" src="http://localhost:8080/ProjetoLP2/img/${user.getUsername()}/${user.getPhoto()}"/>
-        <h1>Welcome ${user.getUsername()}</h1>
         <c:choose>
             <c:when test="${user.getUser_type() == 0}">
                 <%@include file="menu_admin.jspf" %>
