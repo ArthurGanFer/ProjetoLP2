@@ -26,6 +26,32 @@
                 <%@include file="menu_user.jspf" %>
             </c:when>
         </c:choose>
-        
+
+        <div class="container">
+            <div class="veiculo-container">
+                <a href="#"><image class="veiculo" src="img/veiculos/veiculo1.jpg"/></a>
+            </div>
+
+            <div class="veiculo-container">
+                <a href="#"><image class="veiculo" src="img/veiculos/veiculo2.jpg"/></a>
+            </div>
+
+            <div class="veiculo-container">
+                <a href="#"><image class="veiculo" src="img/veiculos/veiculo3.jpg"/></a>
+            </div>
+
+            <div class="veiculo-container">
+                <a href="#"><image class="veiculo" src="img/veiculos/veiculo4.png"/></a>
+            </div>
+
+            <div class="veiculo-container">
+                <a href="#"><image class="veiculo" src="img/veiculos/veiculo5.jpg"/></a>
+            </div>
+
+            <div class="veiculo-container">
+                <a href="#"><image class="veiculo" src="img/veiculos/veiculo6.jpg"/></a>
+            </div>
+
+        </div>
     </body>
 </html>
