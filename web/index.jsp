@@ -16,6 +16,9 @@
         <link rel="stylesheet" type="text/css" href="css/style.css"/>
     </head>
     <body>
+        <div class="top-banner">
+            <img src="img/logo.png">
+        </div>
         <div class="container">
             <form class="form-signin" action="FrontController" method="POST">
                 <h2 class="form-signin-heading">LOGIN</h2>

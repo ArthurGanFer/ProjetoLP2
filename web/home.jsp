@@ -26,8 +26,6 @@
                 <%@include file="menu_user.jspf" %>
             </c:when>
         </c:choose>
-
-
-
+        
     </body>
 </html>
