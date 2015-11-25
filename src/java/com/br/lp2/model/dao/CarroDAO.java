@@ -70,7 +70,7 @@ public class CarroDAO implements GenericDAO<Carro> {
                 String modelo = rs.getString("modelo");
                 int ano = rs.getInt("ano");
                 int quantidade = rs.getInt("quantidade");
-                Carro c = new Carro();
+                Carro c = new Carro(id, marca, modelo, ano, quantidade);
                 carros.add(c);
             }
 
@@ -82,6 +82,35 @@ public class CarroDAO implements GenericDAO<Carro> {
             ex.printStackTrace();
         }
         return carros;
+    }
+
+    public Carro readById(int id_carro) {
+        Carro carro = new Carro();
+        //2. Criar o preparedStatement
+        String sql = "SELECT * FROM carro WHERE id_carro=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id_carro);
+            //3. Executa a query
+            ResultSet rs = ps.executeQuery();
+
+            //4. Mostrar os resultados
+            while (rs.next()) {
+                carro.setId_carro(rs.getInt("id_carro"));
+                carro.setMarca(rs.getString("marca"));
+                carro.setModelo(rs.getString("modelo"));
+                carro.setAno(rs.getInt("ano"));
+                carro.setQuantidade(rs.getInt("quantidade"));
+            }
+
+            //5. Fechar tudo
+            ps.close();
+            rs.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return carro;
     }
 
     @Override

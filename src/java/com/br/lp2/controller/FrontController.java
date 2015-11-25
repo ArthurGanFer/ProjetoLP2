@@ -9,6 +9,7 @@ import com.br.lp2.business.PhotoUploader;
 import com.br.lp2.business.UserManager;
 import com.br.lp2.model.Usuario;
 import com.br.lp2.model.Usuario_info;
+import com.br.lp2.model.dao.CarroDAO;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -56,6 +57,11 @@ public class FrontController extends HttpServlet {
             String page = "home.jsp";
             String msg = "";
             RequestDispatcher rd;
+            RequestDispatcher rdInfo = request.getRequestDispatcher("/carroInfo.jsp");
+
+            CarroDAO carrodao = new CarroDAO();
+            request.getSession().setAttribute("carros", carrodao.read());
+
             //---------- OPERAÇÕES DO USUÁRIO ----------
             if (command.startsWith("user")) {
                 int code = 0;
@@ -157,6 +163,18 @@ public class FrontController extends HttpServlet {
                 }
 
             } // FIM DO IF PARA USUÁRIO
+
+            if (command.startsWith("carro")) {
+
+                if (command.endsWith("info")) {
+                    int id_carro = Integer.parseInt((request.getParameter("idcarro")));
+                    System.out.println(carrodao.readById(id_carro));
+
+                    request.getSession().setAttribute("carroinfo", carrodao.readById(id_carro));
+
+                    rdInfo.forward(request, response);
+                }
+            }
 
             // coloca a mensagem na sessão e encaminha para a página correta
             request.getSession().setAttribute("code", msg);

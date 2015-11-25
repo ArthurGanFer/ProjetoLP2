@@ -26,14 +26,8 @@
                 <%@include file="menu_user.jspf" %>
             </c:when>
         </c:choose>
-
-        <div class="container">
-            <c:forEach items="${carros}" var="carro">
-                <div class="veiculo-container">
-                    <a href="FrontController?idcarro=${carro.getId_carro()}&command=carro.info"><image class="veiculo" src="img/veiculos/veiculo${carro.getId_carro()}.jpg"/></a>
-                </div>
-            </c:forEach>
-        </div>
+        
+        <c:out value="${carroinfo}"></c:out>
 
     </body>
 </html>
