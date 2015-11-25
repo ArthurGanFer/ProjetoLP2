@@ -10,6 +10,9 @@
                 <li class="active">
                     <a>Welcome ${user.getUsername()}</a>
                 </li>
+                <li>
+                    <a href="FrontController?idusuario=${user.getId_user()}&command=user.historico">Histórico</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>

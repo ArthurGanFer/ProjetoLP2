@@ -7,6 +7,7 @@ package com.br.lp2.controller;
 
 import com.br.lp2.business.PhotoUploader;
 import com.br.lp2.business.UserManager;
+import com.br.lp2.model.Carro;
 import com.br.lp2.model.Usuario;
 import com.br.lp2.model.Usuario_info;
 import com.br.lp2.model.Vendas;
@@ -165,6 +166,12 @@ public class FrontController extends HttpServlet {
                             break;
                     }
 
+                    if (command.endsWith("historico")) {
+                        int id_usuario = Integer.parseInt(request.getParameter("idusuario"));
+                        request.getSession().setAttribute("vendas", vendasdao.readByUsuario(id_usuario));
+                        page = "historico.jsp";
+                    }
+
                 }
 
             } // FIM DO IF PARA USUÁRIO
@@ -172,7 +179,7 @@ public class FrontController extends HttpServlet {
             if (command.startsWith("carro")) {
 
                 if (command.endsWith("info")) {
-                    int id_carro = Integer.parseInt((request.getParameter("idcarro")));
+                    int id_carro = Integer.parseInt(request.getParameter("idcarro"));
                     request.getSession().setAttribute("carroinfo", carrodao.readById(id_carro));
 
                     rdInfo.forward(request, response);
@@ -183,16 +190,20 @@ public class FrontController extends HttpServlet {
 
                 if (command.endsWith("vendas")) {
                     request.getSession().setAttribute("vendas", vendasdao.readByStatus("pendente"));
-                    System.out.println(vendasdao.read());
                     rdVendas.forward(request, response);
                 }
 
                 if (command.endsWith("aprovar")) {
                     int id_venda = Integer.parseInt(request.getParameter("idvenda"));
+                    int id_carro = Integer.parseInt(request.getParameter("idcarro"));
+
+                    Carro carro = carrodao.readById(id_carro);
+                    int qtdAtualizada = carro.getQuantidade() - 1;
+                    carro.setQuantidade(qtdAtualizada);
+                    carrodao.update(carro);
 
                     Vendas venda = vendasdao.readById(id_venda);
                     venda.setVenda_status("aprovada");
-                    System.out.println(venda.getVenda_status());
                     vendasdao.update(venda);
                 }
 
@@ -201,7 +212,6 @@ public class FrontController extends HttpServlet {
 
                     Vendas venda = vendasdao.readById(id_venda);
                     venda.setVenda_status("rejeitada");
-                    System.out.println(venda.getVenda_status());
                     vendasdao.update(venda);
                 }
 
@@ -217,8 +227,6 @@ public class FrontController extends HttpServlet {
                     Vendas venda = new Vendas();
                     venda.setId_carro(id_carro);
                     venda.setId_usuario(id_usuario);
-                    System.out.println(id_carro);
-                    System.out.println(id_usuario);
                     vendasdao.insert(venda);
 
                     rdHome.forward(request, response);

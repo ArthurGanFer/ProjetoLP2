@@ -30,24 +30,29 @@
             <table class="table table-striped">
                 <tr>
                     <th>#id</th>
-                    <th>Usuario</th>
                     <th>Carro</th>
                     <th>Ano</th>
                     <th>Valor</th>
-                    <th>Ação</th>
+                    <th>Status</th>
                 </tr>
                 <c:forEach items="${vendas}" var="venda">
                     <tr>
                         <td>${venda.getId_vendas()}</td>
-                        <td>${venda.getUsuario_info().getNome()}</td>
                         <td>${venda.getCarro().getMarca()} ${venda.getCarro().getModelo()}</td>
                         <td>${venda.getCarro().getAno()}</td>
                         <td>R$${venda.getCarro().getPreco()},00</td>
                         <td>
-                            <div>
-                                <a class="btn btn-xs btn-success" href="FrontController?idvenda=${venda.getId_vendas()}&idcarro=${venda.getCarro().getId_carro()}&command=admin.aprovar">Aprovar</a>
-                                <a class="btn btn-xs btn-danger" href="FrontController?idvenda=${venda.getId_vendas()}&command=admin.rejeitar">Rejeitar</a>
-                            </div>
+                            <c:choose>
+                                <c:when test="${venda.getVenda_status() == 'pendente'}">
+                                    <span class="label label-primary">pendente</span>
+                                </c:when>
+                                <c:when test="${venda.getVenda_status() == 'aprovada'}">
+                                    <span class="label label-success">aprovada</span>
+                                </c:when>
+                                <c:when test="${venda.getVenda_status() == 'rejeitada'}">
+                                    <span class="label label-danger">rejeitada</span>
+                                </c:when>
+                            </c:choose>
                         </td>
                     </tr>
                 </c:forEach>

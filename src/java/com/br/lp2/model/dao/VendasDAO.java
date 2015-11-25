@@ -234,5 +234,48 @@ public class VendasDAO implements GenericDAO<Vendas> {
         }
         return vendas;
     }
+    
+    public List<Vendas> readByUsuario(int where) {
+        List<Vendas> vendas = new ArrayList<>();
+        //2. Criar o preparedStatement
+        String sql = "SELECT * FROM vendas v "
+                + "INNER JOIN carro c ON c.id_carro = v.id_carro "
+                + "WHERE id_usuario=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, where);
+
+            //3. Executa a query
+            ResultSet rs = ps.executeQuery();
+
+            //4. Mostrar os resultados
+            while (rs.next()) {
+                Carro carro = new Carro();
+                carro.setId_carro(rs.getInt("id_carro"));
+                carro.setMarca(rs.getString("marca"));
+                carro.setModelo(rs.getString("modelo"));
+                carro.setAno(rs.getInt("ano"));
+                carro.setQuantidade(rs.getInt("quantidade"));
+                carro.setPreco(rs.getInt("preco"));
+
+                Vendas venda = new Vendas();
+                venda.setCarro(carro);
+                venda.setId_vendas(rs.getInt("id_venda"));
+                venda.setId_carro(rs.getInt("id_carro"));
+                venda.setId_usuario(rs.getInt("id_usuario"));
+                venda.setData_venda(rs.getDate("data_venda"));
+                venda.setVenda_status(rs.getString("venda_status"));
+                vendas.add(venda);
+            }
+
+            //5. Fechar tudo
+            ps.close();
+            rs.close();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return vendas;
+    }
 
 }
