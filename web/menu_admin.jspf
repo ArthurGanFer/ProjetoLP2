@@ -16,6 +16,9 @@
                 <li>
                     <a>Mudar Privilégio do Usuário</a>
                 </li>
+                <li>
+                    <a href="FrontController?command=admin.vendas">Vendas</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>

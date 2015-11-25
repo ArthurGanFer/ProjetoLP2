@@ -10,6 +10,7 @@ import com.br.lp2.business.UserManager;
 import com.br.lp2.model.Usuario;
 import com.br.lp2.model.Usuario_info;
 import com.br.lp2.model.dao.CarroDAO;
+import com.br.lp2.model.dao.VendasDAO;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -58,7 +59,9 @@ public class FrontController extends HttpServlet {
             String msg = "";
             RequestDispatcher rd;
             RequestDispatcher rdInfo = request.getRequestDispatcher("/carroInfo.jsp");
+            RequestDispatcher rdVendas = request.getRequestDispatcher("/vendas.jsp");
 
+            VendasDAO vendasdao = new VendasDAO();
             CarroDAO carrodao = new CarroDAO();
             request.getSession().setAttribute("carros", carrodao.read());
 
@@ -168,11 +171,18 @@ public class FrontController extends HttpServlet {
 
                 if (command.endsWith("info")) {
                     int id_carro = Integer.parseInt((request.getParameter("idcarro")));
-                    System.out.println(carrodao.readById(id_carro));
-
                     request.getSession().setAttribute("carroinfo", carrodao.readById(id_carro));
 
                     rdInfo.forward(request, response);
+                }
+            }
+
+            if (command.startsWith("admin")) {
+
+                if (command.endsWith("vendas")) {
+                    request.getSession().setAttribute("vendas", vendasdao.read());
+
+                    rdVendas.forward(request, response);
                 }
             }
 

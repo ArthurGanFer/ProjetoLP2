@@ -46,7 +46,7 @@ public class VendasDAO implements GenericDAO<Vendas> {
                 int id_carro = rs.getInt("id_carro");
                 int id_usuario = rs.getInt("id_usuario");
                 Date data_venda = rs.getDate("data_venda");
-                Vendas v = new Vendas();
+                Vendas v = new Vendas(id, id_carro, id_usuario, data_venda);
                 vendas.add(v);
             }
 

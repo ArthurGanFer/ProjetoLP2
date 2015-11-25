@@ -30,13 +30,14 @@ public class CarroDAO implements GenericDAO<Carro> {
     @Override
     public boolean insert(Carro carro) {
         boolean resp = false;
-        String sql = "INSERT INTO carro(marca,modelo,ano,quantidade) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO carro(marca,modelo,ano,quantidade,preco) VALUES(?,?,?,?,?)";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, carro.getMarca());
             ps.setString(2, carro.getModelo());
             ps.setInt(3, carro.getAno());
             ps.setInt(4, carro.getQuantidade());
+            ps.setInt(5, carro.getPreco());
             int resposta = ps.executeUpdate();
             if (resposta == 0) {
                 System.out.println("Erro ao inserir o carro");
@@ -70,7 +71,8 @@ public class CarroDAO implements GenericDAO<Carro> {
                 String modelo = rs.getString("modelo");
                 int ano = rs.getInt("ano");
                 int quantidade = rs.getInt("quantidade");
-                Carro c = new Carro(id, marca, modelo, ano, quantidade);
+                int preco = rs.getInt("preco");
+                Carro c = new Carro(id, marca, modelo, ano, quantidade, preco);
                 carros.add(c);
             }
 
@@ -101,6 +103,7 @@ public class CarroDAO implements GenericDAO<Carro> {
                 carro.setModelo(rs.getString("modelo"));
                 carro.setAno(rs.getInt("ano"));
                 carro.setQuantidade(rs.getInt("quantidade"));
+                carro.setPreco(rs.getInt("preco"));
             }
 
             //5. Fechar tudo
@@ -116,13 +119,14 @@ public class CarroDAO implements GenericDAO<Carro> {
     @Override
     public boolean update(Carro carro) {
         boolean resp = false;
-        String sql = "UPDATE carro SET marca=?,modelo=?,ano=?,quantidade=? WHERE id_carro=?";
+        String sql = "UPDATE carro SET marca=?,modelo=?,ano=?,quantidade=?,preco=? WHERE id_carro=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, carro.getMarca());
             ps.setString(2, carro.getModelo());
             ps.setInt(3, carro.getAno());
             ps.setInt(4, carro.getQuantidade());
+            ps.setInt(5, carro.getPreco());
             int resposta = ps.executeUpdate();
             if (resposta == 0) {
                 System.out.println("Erro ao atualizar o carro");

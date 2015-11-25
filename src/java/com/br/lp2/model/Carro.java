@@ -16,16 +16,18 @@ public class Carro {
     private String modelo;
     private int ano;
     private int quantidade;
+    private int preco;
 
     public Carro() {
     }
 
-    public Carro(int id_carro, String marca, String modelo, int ano, int quantidade) {
+    public Carro(int id_carro, String marca, String modelo, int ano, int quantidade, int preco) {
         this.id_carro = id_carro;
         this.marca = marca;
         this.modelo = modelo;
         this.ano = ano;
         this.quantidade = quantidade;
+        this.preco = preco;
     }
 
     public int getId_carro() {
@@ -68,9 +70,17 @@ public class Carro {
         this.quantidade = quantidade;
     }
 
+    public int getPreco() {
+        return preco;
+    }
+
+    public void setPreco(int preco) {
+        this.preco = preco;
+    }
+
     @Override
     public String toString() {
-        return "Carro{" + "id_carro=" + id_carro + ", marca=" + marca + ", modelo=" + modelo + ", ano=" + ano + ", quantidade=" + quantidade + '}';
+        return "Carro{" + "id_carro=" + id_carro + ", marca=" + marca + ", modelo=" + modelo + ", ano=" + ano + ", quantidade=" + quantidade + ", preco=" + preco + '}';
     }
 
 }
