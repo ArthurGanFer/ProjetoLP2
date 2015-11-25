@@ -26,8 +26,27 @@
                 <%@include file="menu_user.jspf" %>
             </c:when>
         </c:choose>
-        
-        <c:out value="${carroinfo}"></c:out>
-
+        <div class="container">
+            <image class="veiculo" src="img/veiculos/veiculo${carroinfo.getId_carro()}.jpg"/>
+            <ul>
+                <li>
+                    <p>Marca - ${carroinfo.getMarca()}</p>
+                </li>
+                <li>
+                    <p>Modelo - ${carroinfo.getModelo()}</p>
+                </li>
+                <li>
+                    <p>Ano - ${carroinfo.getAno()}</p>
+                </li>
+                <li>
+                    <p>Quantidade disponivel - ${carroinfo.getQuantidade()}</p>
+                </li>
+                <li>
+                    <p>Preço - R$${carroinfo.getPreco()},00</p>
+                </li>
+            </ul>
+            <a class="btn btn-success" href="FrontController?idcarro=${carroinfo.getId_carro()}&idusuario=${user.getId_user()}&command=compra.confirmar">Comprar</a>
+            <a class="btn btn-default" href="home.jsp">Voltar</a>
+        </div>
     </body>
 </html>

@@ -127,6 +127,7 @@ public class CarroDAO implements GenericDAO<Carro> {
             ps.setInt(3, carro.getAno());
             ps.setInt(4, carro.getQuantidade());
             ps.setInt(5, carro.getPreco());
+            ps.setInt(6, carro.getId_carro());
             int resposta = ps.executeUpdate();
             if (resposta == 0) {
                 System.out.println("Erro ao atualizar o carro");

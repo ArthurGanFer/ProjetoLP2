@@ -9,6 +9,7 @@ import com.br.lp2.business.PhotoUploader;
 import com.br.lp2.business.UserManager;
 import com.br.lp2.model.Usuario;
 import com.br.lp2.model.Usuario_info;
+import com.br.lp2.model.Vendas;
 import com.br.lp2.model.dao.CarroDAO;
 import com.br.lp2.model.dao.VendasDAO;
 import java.io.File;
@@ -60,6 +61,7 @@ public class FrontController extends HttpServlet {
             RequestDispatcher rd;
             RequestDispatcher rdInfo = request.getRequestDispatcher("/carroInfo.jsp");
             RequestDispatcher rdVendas = request.getRequestDispatcher("/vendas.jsp");
+            RequestDispatcher rdHome = request.getRequestDispatcher("/home.jsp");
 
             VendasDAO vendasdao = new VendasDAO();
             CarroDAO carrodao = new CarroDAO();
@@ -180,9 +182,47 @@ public class FrontController extends HttpServlet {
             if (command.startsWith("admin")) {
 
                 if (command.endsWith("vendas")) {
-                    request.getSession().setAttribute("vendas", vendasdao.read());
-
+                    request.getSession().setAttribute("vendas", vendasdao.readByStatus("pendente"));
+                    System.out.println(vendasdao.read());
                     rdVendas.forward(request, response);
+                }
+
+                if (command.endsWith("aprovar")) {
+                    int id_venda = Integer.parseInt(request.getParameter("idvenda"));
+
+                    Vendas venda = vendasdao.readById(id_venda);
+                    venda.setVenda_status("aprovada");
+                    System.out.println(venda.getVenda_status());
+                    vendasdao.update(venda);
+                }
+
+                if (command.endsWith("rejeitar")) {
+                    int id_venda = Integer.parseInt(request.getParameter("idvenda"));
+
+                    Vendas venda = vendasdao.readById(id_venda);
+                    venda.setVenda_status("rejeitada");
+                    System.out.println(venda.getVenda_status());
+                    vendasdao.update(venda);
+                }
+
+            }
+
+            if (command.startsWith("compra")) {
+
+                if (command.endsWith("confirmar")) {
+
+                    int id_carro = Integer.parseInt(request.getParameter("idcarro"));
+                    int id_usuario = Integer.parseInt(request.getParameter("idusuario"));
+
+                    Vendas venda = new Vendas();
+                    venda.setId_carro(id_carro);
+                    venda.setId_usuario(id_usuario);
+                    System.out.println(id_carro);
+                    System.out.println(id_usuario);
+                    vendasdao.insert(venda);
+
+                    rdHome.forward(request, response);
+
                 }
             }
 

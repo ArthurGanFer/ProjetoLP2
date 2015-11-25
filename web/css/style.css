@@ -17,3 +17,8 @@
     padding: 20px;
     float: left;
 }
+
+table, th, td {
+    border: 1px solid black;
+}
+

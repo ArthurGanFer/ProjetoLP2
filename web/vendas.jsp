@@ -26,8 +26,32 @@
                 <%@include file="menu_user.jspf" %>
             </c:when>
         </c:choose>
-        
-        <c:out value="${vendas}"></c:out>
-
+        <div class="container">
+            <table class="table table-striped">
+                <tr>
+                    <th>#id</th>
+                    <th>Usuario</th>
+                    <th>Carro</th>
+                    <th>Ano</th>
+                    <th>Valor</th>
+                    <th>Ação</th>
+                </tr>
+                <c:forEach items="${vendas}" var="venda">
+                    <tr>
+                        <td>${venda.getId_vendas()}</td>
+                        <td>${venda.getUsuario_info().getNome()}</td>
+                        <td>${venda.getCarro().getMarca()} ${venda.getCarro().getModelo()}</td>
+                        <td>${venda.getCarro().getAno()}</td>
+                        <td>R$${venda.getCarro().getPreco()},00</td>
+                        <td>
+                            <div>
+                                <a class="btn btn-xs btn-success" href="FrontController?idvenda=${venda.getId_vendas()}&command=admin.aprovar">Aprovar</a>
+                                <a class="btn btn-xs btn-danger" href="FrontController?idvenda=${venda.getId_vendas()}&command=admin.rejeitar">Rejeitar</a>
+                            </div>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </div>
     </body>
 </html>

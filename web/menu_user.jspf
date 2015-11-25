@@ -3,7 +3,7 @@
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
-            <img alt="imagem" class="avatar" src="http://localhost:8080/ProjetoLP2/img/${user.getUsername()}/${user.getPhoto()}"/>
+            <a href="home.jsp"><img alt="imagem" class="avatar" src="http://localhost:8080/ProjetoLP2/img/${user.getUsername()}/${user.getPhoto()}"/></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
