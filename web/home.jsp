@@ -30,7 +30,7 @@
         <div class="container">
             <c:forEach items="${carros}" var="carro">
                 <div class="veiculo-container">
-                    <image class="veiculo" src="img/veiculos/veiculo${carro.getId_carro()}.jpg"/>
+                    <image class="veiculo" src="img/veiculos/${carro.getMarca()}/${carro.getModelo()}.jpg"/>
                     <c:choose>
                         <c:when test="${carro.getQuantidade() > 0}">
                             <a class="btn btn-lg btn-block btn-success" href="FrontController?idcarro=${carro.getId_carro()}&command=carro.info">R$${carro.getPreco()},00</a>
