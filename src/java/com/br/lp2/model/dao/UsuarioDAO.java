@@ -65,7 +65,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     public List<Usuario> read() {
         List<Usuario> users = new ArrayList<>();
         //2. Criar o preparedStatement
-        String sql = "SELECT * FROM usuario u"
+        String sql = "SELECT * FROM usuario u "
                 + "INNER JOIN usuario_info i ON u.id_usuario = i.id_usuario";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -75,8 +75,15 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
 
             //4. Mostrar os resultados
             while (rs.next()) {
+                Usuario_info info = new Usuario_info();
+                info.setId_usuario_info(rs.getInt("id_usuario_info"));
+                info.setId_usuario(rs.getInt("id_usuario"));
+                info.setNome(rs.getString("nome"));
+                info.setEmail(rs.getString("email"));
+
                 Usuario user = new Usuario();
-                user.setId_user(rs.getInt("id_user"));
+                user.setUsuario_info(info);
+                user.setId_user(rs.getInt("id_usuario"));
                 user.setUsername(rs.getString("username"));
                 user.setPassword(rs.getString("password"));
                 user.setUser_type(rs.getInt("user_type"));
@@ -155,15 +162,13 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     @Override
     public boolean update(Usuario user) {
         boolean resp = false;
-        String sql = "UPDATE user_lp2 SET username=?,password=?,user_type=?,birthday=?,photo=? WHERE id_user=?";
+        String sql = "UPDATE usuario SET username=?,password=?,user_type=? WHERE id_usuario=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPassword());
             ps.setInt(3, user.getUser_type());
-            ps.setDate(4, new java.sql.Date(user.getBirthday().getTime()));
-            ps.setString(5, user.getPhoto());
-            ps.setInt(6, user.getId_user());
+            ps.setInt(4, user.getId_user());
             int resposta = ps.executeUpdate();
             if (resposta == 0) {
                 System.out.println("Erro: Usuário não pode ser atualizado !");
@@ -182,10 +187,36 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
     @Override
     public boolean delete(Usuario user) {
         boolean resp = false;
+        int resposta = 0;
         String sql = "DELETE FROM usuario WHERE id_usuario=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, user.getId_user());
+
+            if (this.deleteInfo(user.getId_user())) {
+                resposta = ps.executeUpdate();
+            }
+
+            if (resposta == 0) {
+                System.out.println("Erro ao remover usuário !");
+            } else {
+                System.out.println("Usuário removido com sucesso !");
+                resp = true;
+            }
+
+            ps.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return resp;
+    }
+
+    private boolean deleteInfo(int id_usuario) {
+        boolean resp = false;
+        String sql = "DELETE FROM usuario_info WHERE id_usuario=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id_usuario);
             int resposta = ps.executeUpdate();
             if (resposta == 0) {
                 System.out.println("Erro ao remover usuário !");
@@ -199,6 +230,7 @@ public class UsuarioDAO implements GenericDAO<Usuario> {
             ex.printStackTrace();
         }
         return resp;
+
     }
 
 }

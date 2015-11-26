@@ -11,10 +11,7 @@
                     <a>Welcome ${user.getUsername()}</a>
                 </li>
                 <li>
-                    <a>Remover Usuário</a>
-                </li>
-                <li>
-                    <a>Mudar Privilégio do Usuário</a>
+                    <a href="FrontController?command=admin.manager">Gerenciar Usuários</a>
                 </li>
                 <li>
                     <a href="FrontController?command=admin.vendas">Vendas</a>

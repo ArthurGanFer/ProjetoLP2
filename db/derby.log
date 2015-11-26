@@ -1,14 +1,14 @@
-Wed Nov 25 14:41:51 BRST 2015 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
+Wed Nov 25 20:31:46 BRST 2015 : Apache Derby Servidor de Rede - 10.10.2.0 - (1582446) iniciado e pronto para aceitar conexões na porta 1527 em {3}
 ----------------------------------------------------------------
-Wed Nov 25 14:41:52 BRST 2015:
- Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0151-3f85-c876-000043cdf62f
-no diretório de banco de dados C:\Users\Arthur\Desktop\Nova pasta\ProjetoLP2\db\banco_lp2_03H 
+Wed Nov 25 20:31:47 BRST 2015:
+ Inicializando o Derby versão The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instância a816c00e-0151-40c6-277a-000077acfd3c
+no diretório de banco de dados C:\Users\Arthur Ferreira\Documents\NetBeansProjects\ProjetoLP2\db\banco_lp2_03H 
 
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_45-b14
-user.dir=C:\Program Files\glassfish-4.1\javadb
-os.name=Windows 8.1
+java.runtime.version=1.8.0_65-b17
+user.dir=C:\Program Files\glassfish-4.1.1\javadb
+os.name=Windows 10
 os.arch=amd64
-os.version=6.3
-derby.system.home=C:\Users\Arthur\Desktop\Nova pasta\ProjetoLP2\db
+os.version=10.0
+derby.system.home=C:\Users\Arthur Ferreira\Documents\NetBeansProjects\ProjetoLP2\db
 Carregador de classe do banco de dados iniciado - derby.database.classpath=''

@@ -12,6 +12,7 @@ import com.br.lp2.model.Usuario;
 import com.br.lp2.model.Usuario_info;
 import com.br.lp2.model.Vendas;
 import com.br.lp2.model.dao.CarroDAO;
+import com.br.lp2.model.dao.UsuarioDAO;
 import com.br.lp2.model.dao.VendasDAO;
 import java.io.File;
 import java.io.IOException;
@@ -60,12 +61,10 @@ public class FrontController extends HttpServlet {
             String page = "home.jsp";
             String msg = "";
             RequestDispatcher rd;
-            RequestDispatcher rdInfo = request.getRequestDispatcher("/carroInfo.jsp");
-            RequestDispatcher rdVendas = request.getRequestDispatcher("/vendas.jsp");
-            RequestDispatcher rdHome = request.getRequestDispatcher("/home.jsp");
 
             VendasDAO vendasdao = new VendasDAO();
             CarroDAO carrodao = new CarroDAO();
+            UsuarioDAO usuariodao = new UsuarioDAO();
             request.getSession().setAttribute("carros", carrodao.read());
 
             //---------- OPERAÇÕES DO USUÁRIO ----------
@@ -182,7 +181,7 @@ public class FrontController extends HttpServlet {
                     int id_carro = Integer.parseInt(request.getParameter("idcarro"));
                     request.getSession().setAttribute("carroinfo", carrodao.readById(id_carro));
 
-                    rdInfo.forward(request, response);
+                    page = "carroInfo.jsp";
                 }
             }
 
@@ -190,7 +189,7 @@ public class FrontController extends HttpServlet {
 
                 if (command.endsWith("vendas")) {
                     request.getSession().setAttribute("vendas", vendasdao.readByStatus("pendente"));
-                    rdVendas.forward(request, response);
+                    page = "vendas.jsp";
                 }
 
                 if (command.endsWith("aprovar")) {
@@ -215,12 +214,41 @@ public class FrontController extends HttpServlet {
                     vendasdao.update(venda);
                 }
 
+                if (command.endsWith("manager")) {
+                    request.getSession().setAttribute("usuarios", usuariodao.read());
+                    page = "admin_manager.jsp";
+                }
+
+                if (command.endsWith("promover")) {
+                    Usuario usuario = usuariodao.readByUsername(request.getParameter("username"));
+                    usuario.setUser_type(0);
+
+                    System.out.println(usuario);
+
+                    usuariodao.update(usuario);
+                }
+
+                if (command.endsWith("banir")) {
+                    Usuario usuario = usuariodao.readByUsername(request.getParameter("username"));
+                    usuariodao.delete(usuario);
+                }
+
+                if (command.endsWith("update")) {
+                    int quantidade = Integer.parseInt(request.getParameter("quantidade"));
+                    int preco = Integer.parseInt(request.getParameter("preco"));
+                    int id_carro = Integer.parseInt(request.getParameter("idcarro"));
+
+                    Carro carro = carrodao.readById(id_carro);
+                    carro.setQuantidade(quantidade);
+                    carro.setPreco(preco);
+
+                    carrodao.update(carro);
+                }
             }
 
             if (command.startsWith("compra")) {
 
                 if (command.endsWith("confirmar")) {
-
                     int id_carro = Integer.parseInt(request.getParameter("idcarro"));
                     int id_usuario = Integer.parseInt(request.getParameter("idusuario"));
 
@@ -229,7 +257,9 @@ public class FrontController extends HttpServlet {
                     venda.setId_usuario(id_usuario);
                     vendasdao.insert(venda);
 
-                    rdHome.forward(request, response);
+                    request.getSession().setAttribute("carro", carrodao.readById(id_carro));
+
+                    page = "confirmacao.jsp";
 
                 }
             }

@@ -5,11 +5,13 @@
  */
 package com.br.lp2.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author 31338283
  */
-public class Usuario_info {
+public class Usuario_info implements Serializable{
 
     private int id_usuario_info; //chave primaria
     private int id_usuario; //chave estrangeira de usuario
